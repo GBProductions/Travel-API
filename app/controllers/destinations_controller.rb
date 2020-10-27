@@ -1,7 +1,7 @@
 class DestinationsController < ApplicationController
 
 def index
-  @destinations = Destination.all
+    @destinations = Destination.all
     json_response(@destinations)
 end
 
@@ -11,7 +11,7 @@ def show
 end
 
 def create
-  @destination = Destination.find(quote_params)
+  @destination = Destination.create!(destination_params)
   json_response(@destination, :created)
 end
 
@@ -34,6 +34,9 @@ def destroy
 end
 
 private
+  def json_response(object, status = :ok)
+    render json: object, status: status
+end
 
   def destination_params
     params.permit(:country, :city, :reviews_count)

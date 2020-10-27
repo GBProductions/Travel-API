@@ -1,27 +1,23 @@
-class ReviewController < ApplicationController
+class ReviewsController < ApplicationController
 
   def index
-    @review = review.all
-    if params[:page]
-      page = params[:page]
-      @reviews = review.search(page)
-    end
-    json_response(@reviews)
+    @review = Review.all
+    json_response(@review)
   end
 
   def show
-    @review = review.find(params[:id])
+    @review = Review.find(params[:id])
     json_response(@review)
   end
 
   def create
-    @review = review.create!(review_params)
-    json_response(@review, :created)
+    @review = Review.create(review_params)
+    json_response(@review)
   end
 
   def update
-    @review = review.find(params[:id])
-    if @review.update!(review_params)
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
       render status: 200, json: {
         message: "This review has been updated successfully."
       }
@@ -29,18 +25,21 @@ class ReviewController < ApplicationController
   end
 
   def destroy
-    @review = review.find(params[:id])
+    @review = Review.find(params[:id])
     if @review.destroy
       render status: 200, json: {
         message: "This review has been successfully removed."
       }
     end
   end
-
+  
   private
+  def json_response(object, status = :ok)
+    render json: object, status: status
+  end
 
   def review_params
-    params.permit(:rating, :content, :user_id, :destination_id)
+    params.permit(:content, :rating, :user_id, :destination_id)
   end
-  
 end
+

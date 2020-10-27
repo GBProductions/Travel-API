@@ -2,7 +2,13 @@ class ReviewsController < ApplicationController
 
   def index
     @review = Review.all
-    json_response(@review)
+    @page_reviews = @reviews.paginate(:page => params[:page], :per_page => 15)
+    if params[:search_by_rating]
+      @reviews = Review.search_by_rating(params[:search_by_rating])
+    else
+      @reviews = Review.all  
+    end  
+    json_response(@reviews)
   end
 
   def show
@@ -34,10 +40,7 @@ class ReviewsController < ApplicationController
   end
   
   private
-  def json_response(object, status = :ok)
-    render json: object, status: status
-  end
-
+ 
   def review_params
     params.permit(:content, :rating, :user_id, :destination_id)
   end

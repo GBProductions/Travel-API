@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe Destination, :type => :model do
   
   before(:all) do
-    let!(:destination) { FactoryBot.create_list(:quote, 20)}
+    @destination = create(:destination)
+   
   end
   
   it "shows rating of destination" do
@@ -20,4 +21,3 @@ RSpec.describe Destination, :type => :model do
 
 end
 
-let!(:quotes) { FactoryBot.create_list(:quote, 20)}

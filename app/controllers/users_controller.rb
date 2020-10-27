@@ -61,9 +61,6 @@ class UsersController < ApplicationController
   end
 
   private
-  def json_response(object, status = :ok)
-    render json: object, status: status
-  end
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

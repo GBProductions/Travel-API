@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_201542) do
+ActiveRecord::Schema.define(version: 2020_10_27_224003) do
 
   create_table "destinations", force: :cascade do |t|
     t.string "country"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2020_10_27_201542) do
     t.integer "rating"
     t.integer "user_id"
     t.integer "destination_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", limit: 80, null: false
+    t.integer "reviews_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviews_id"], name: "index_users_on_reviews_id"
   end
 
 end

@@ -2,32 +2,19 @@ class Seed
 
   def self.begin
     seed = Seed.new
-    seed.generate_reviews
     seed.generate_destinations
     # seed.generate_users
 
   end
 
-  def generate_reviews
-    20.times do |i|
-      random_destination = Destination.all.sample
-      random_user = User.all.sample
-      review = random_user.reviews.create(
-        destination_id: random_destination.id,
-        content: Faker::Wizards.fact,
-        rating: rand(1...5)
-      )
-      # puts "Review #{i}: Author is #{random_user.id}, Destination is #{review.destination_id}, and the content is '#{review.content}'."
-    end
-  end
-
   def generate_destinations
     20.times do |i|
       destination = Destination.create!(
-      country: Faker::Address.country,
-      city: Faker::Address.city,
-      reviews_count: rand(1...5)
+        country: Faker::Address.country,
+        city: Faker::Address.city,
+        reviews_count: rand(1...5)
       )
+      review = Review.create!(:rating => 5, :content => "poodles", :destination_id => destination.id, :user_id => 555)
     end
   end
   #   puts "Destination #{i}: Destination is #{destination.id}."

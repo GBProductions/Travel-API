@@ -3,7 +3,7 @@ class Review < ApplicationRecord
   belongs_to :destination, counter_cache: true
   validates :user_id, :content, :destination_id, :presence => true 
   validates :rating, inclusion: { in: 1..5}
-
+  
 
   
   scope :search_by_rating, -> (rating_parameter) {where(rating: "#{rating_parameter}")}

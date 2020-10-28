@@ -4,7 +4,6 @@ class Seed
     seed = Seed.new
     seed.generate_destinations
     # seed.generate_users
-
   end
 
   def generate_destinations

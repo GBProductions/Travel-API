@@ -7,7 +7,6 @@ end
 
 def show
   @destination = Destination.find(params[:id])
-  binding.pry
   json_response(@destination)
 end
 

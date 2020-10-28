@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
 
   def index
-    
     if params[:search_by_rating]
       @reviews = Review.search_by_rating(params[:search_by_rating])
     else

@@ -1,12 +1,13 @@
 class DestinationsController < ApplicationController
 
 def index
-    @destinations = Destination.all
+    @destinations = Destination.paginate(page: params[:page], :per_page => 5)
     json_response(@destinations)
 end
 
 def show
   @destination = Destination.find(params[:id])
+  binding.pry
   json_response(@destination)
 end
 
@@ -34,10 +35,7 @@ def destroy
 end
 
 private
-  def json_response(object, status = :ok)
-    render json: object, status: status
-end
-
+  
   def destination_params
     params.permit(:country, :city, :reviews_count)
   end

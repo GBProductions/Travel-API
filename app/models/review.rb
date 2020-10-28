@@ -10,6 +10,6 @@ class Review < ApplicationRecord
 
   scope :top_rated,  -> { order(rating: :desc).limit(100) }
 
-  scope :most_reviewed_city,  -> {(
+  # scope :most_reviewed_city,  -> {(
 
 end

@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
 
   def index
-    @review = Review.all
-    @page_reviews = @reviews.paginate(:page => params[:page], :per_page => 15)
+    
     if params[:search_by_rating]
       @reviews = Review.search_by_rating(params[:search_by_rating])
     else
       @reviews = Review.all  
     end  
+    @reviews = Review.paginate(page: params[:page], :per_page => 5)
     json_response(@reviews)
   end
 
